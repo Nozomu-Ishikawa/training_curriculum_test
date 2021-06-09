@@ -34,9 +34,14 @@ class CalendarsController < ApplicationController
       plans.each do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
+
+      wday_num = Date.today.wday　#当日の曜日を数値で返す
+      if wday_num > 7 #wday_numが7以上だった場合を指定
+        wday_num = wday_num -7
+      end
+
+      days = { :month => (@todays_date + x).month, :date => (@todays_date + x).day, :plans => today_plans, wday => wdaysから値を取り出す記述}
       @week_days.push(days)
     end
-
   end
 end
